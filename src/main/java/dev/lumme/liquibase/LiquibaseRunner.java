@@ -1,5 +1,6 @@
 package dev.lumme.liquibase;
 
+import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
 import liquibase.database.Database;
@@ -38,7 +39,7 @@ public class LiquibaseRunner {
 
     private void doRun() throws SQLException, LiquibaseException {
         Liquibase liquibase = getLiquibase();
-        liquibase.update(null, new LabelExpression());
+        liquibase.update(new Contexts(), new LabelExpression());
     }
 
     Connection getConnection() throws SQLException {
