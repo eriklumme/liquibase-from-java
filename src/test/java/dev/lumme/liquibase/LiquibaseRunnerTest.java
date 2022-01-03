@@ -20,5 +20,7 @@ class LiquibaseRunnerTest {
         Connection connection = runner.getConnection();
 
         Assertions.assertNotNull(connection);
+
+        connection.close();
     }
 }

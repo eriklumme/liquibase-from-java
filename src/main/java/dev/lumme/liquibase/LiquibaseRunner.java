@@ -32,14 +32,15 @@ public class LiquibaseRunner {
     public void run() {
         try {
             doRun();
-        } catch (SQLException | LiquibaseException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Error running Liquibase changelog", e);
         }
     }
 
-    private void doRun() throws SQLException, LiquibaseException {
-        Liquibase liquibase = getLiquibase();
-        liquibase.update(new Contexts(), new LabelExpression());
+    private void doRun() throws Exception {
+        try (Liquibase liquibase = getLiquibase()) {
+            liquibase.update(new Contexts(), new LabelExpression());
+        }
     }
 
     Connection getConnection() throws SQLException {
